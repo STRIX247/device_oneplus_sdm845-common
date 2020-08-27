@@ -1,6 +1,5 @@
 /*
 * Copyright (C) 2016 The OmniROM Project
-* Copyright (C) 2018 Android Open Source Illusion Project
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -16,7 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package com.aosip.device.DeviceSettings;
+package com.oneplus.device.DeviceSettings;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -33,7 +32,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
 
-public class VibratorCallStrengthPreference extends Preference implements
+public class VibratorStrengthPreference extends Preference implements
         SeekBar.OnSeekBarChangeListener {
 
     private SeekBar mSeekBar;
@@ -42,11 +41,14 @@ public class VibratorCallStrengthPreference extends Preference implements
     private int mMaxValue;
     private Vibrator mVibrator;
 
-    private static final String FILE_LEVEL = "/sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-03/c440000.qcom,spmi:qcom,pmi8998@3:qcom,haptics@c000/leds/vibrator/vmax_mv_call";
+    private static final String FILE_LEVEL = "/sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-03/c440000.qcom,spmi:qcom,pmi8998@3:qcom,haptics@c000/leds/vibrator/vmax_mv_user";
     private static final long testVibrationPattern[] = {0,250};
 
-    public VibratorCallStrengthPreference(Context context, AttributeSet attrs) {
+    public VibratorStrengthPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        // from drivers/platform/msm/qpnp-haptic.c
+        // #define QPNP_HAP_VMAX_MIN_MV		116
+        // #define QPNP_HAP_VMAX_MAX_MV		3596
         mMinValue = 116;
         mMaxValue = 2088;
 
@@ -72,10 +74,11 @@ public class VibratorCallStrengthPreference extends Preference implements
 	public static String getValue(Context context) {
 		return Utils.getFileValue(FILE_LEVEL, "2088");
 	}
+
 	private void setValue(String newValue, boolean withFeedback) {
 	    Utils.writeValue(FILE_LEVEL, newValue);
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
-        editor.putString(DeviceSettings.KEY_CALL_VIBSTRENGTH, newValue);
+        editor.putString(DeviceSettings.KEY_VIBSTRENGTH, newValue);
         editor.commit();
 	}
 
@@ -84,7 +87,7 @@ public class VibratorCallStrengthPreference extends Preference implements
             return;
         }
 
-        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_CALL_VIBSTRENGTH, "2088");
+        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_VIBSTRENGTH, "2088");
         Utils.writeValue(FILE_LEVEL, storedValue);
     }
 

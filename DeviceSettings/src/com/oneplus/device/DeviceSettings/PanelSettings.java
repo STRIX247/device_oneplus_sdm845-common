@@ -15,7 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package com.aosip.device.DeviceSettings;
+package com.oneplus.device.DeviceSettings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

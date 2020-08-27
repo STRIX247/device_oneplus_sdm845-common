@@ -31,18 +31,8 @@
             android:summary="@string/panel_category_summary"
             android:persistent="false" >
             <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.aosip.device.DeviceSettings"
-                    android:targetClass="com.aosip.device.DeviceSettings.PanelSettingsActivity" />
-        </Preference>
-
-        <Preference
-            android:key="touchscreen_gesture_category"
-            android:title="@string/touchscreen_gesture_settings_title"
-            android:summary="@string/touchscreen_gesture_settings_summary"
-            android:persistent="false" >
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.aosip.device.DeviceSettings"
-                    android:targetClass="com.aosip.device.DeviceSettings.TouchscreenGestureSettings" />
+                    android:targetPackage="com.oneplus.device.DeviceSettings"
+                    android:targetClass="com.oneplus.device.DeviceSettings.PanelSettingsActivity" />
         </Preference>
     </PreferenceCategory>
 
@@ -77,17 +67,17 @@
 
     <PreferenceCategory
         android:title="@string/category_vibrator">
-        <com.aosip.device.DeviceSettings.VibratorStrengthPreference
+        <com.oneplus.device.DeviceSettings.VibratorStrengthPreference
             android:key="vib_strength"
             android:title="@string/vib_strength_title_head"
             android:summary="@string/vib_strength_summary_head" />
 
-        <com.aosip.device.DeviceSettings.VibratorCallStrengthPreference
+        <com.oneplus.device.DeviceSettings.VibratorCallStrengthPreference
             android:key="vib_call_strength"
             android:title="@string/vib_call_strength_title_head"
             android:summary="@string/vib_call_strength_summary_head" />
 
-        <com.aosip.device.DeviceSettings.VibratorNotifStrengthPreference
+        <com.oneplus.device.DeviceSettings.VibratorNotifStrengthPreference
             android:key="vib_notif_strength"
             android:title="@string/vib_notif_strength_title_head"
             android:summary="@string/vib_notif_strength_summary_head" />
